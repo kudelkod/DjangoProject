@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-{%load static%}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-     <link rel="stylesheet" href="{% static 'css/style.css' %}" >
-    <title>test_blog</title>
-</head>
-<body>
-    <h1>'_'</h1>
-</body>
-</html>
+{%extends "base.html"%}
+{%block title%}Index title{%endblock title%}
+{%block header%}Index Head{%endblock header%}
+
+{%block content%}
+{% for i in n %}
+<li>{{i}}</li>
+{% empty %}
+<li>List is empty</li>
+{% endfor %}
+{%with name="Tom" age=29%}
+<li>Name: {{name}}, Age: {{age}}</li>
+{% endwith %}
+{%endblock content%}

@@ -4,7 +4,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    context = {"n": []}
+    return render(request, "index.html", context)
 
 
 def home(request):

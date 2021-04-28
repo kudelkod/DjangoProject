@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <title>{% block title %} Base title{% endblock title %}</title>
+</head>
+<body>
+  <h1>{% block header %}Base head{% endblock header %}</h1>
+  <ul>{% block content %}Base content{% endblock content %}</ul>
+</body>
+</html>
