@@ -1,0 +1,10 @@
+{%extends 'form.html'%}
+
+{%block form%}
+<h1>URL form</h1>
+<form action="/url-form/" method="post">
+    {%csrf_token%}
+    {{form_url.as_p}}
+    <input type="submit" value="Submit">
+</form>
+{%endblock%}

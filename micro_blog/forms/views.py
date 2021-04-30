@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views import generic
 
 from . import forms
 
@@ -37,9 +38,11 @@ def file_input(request):
 def form(request):
     form_for_author = forms.AuthorForm
     form_for_article = forms.ArticleForm
+    form_contact = forms.ContactForm
     context = {
         'form_for_author': form_for_author,
         'form_for_article': form_for_article,
+        'form_contact': form_contact,
     }
     return render(request, 'form.html', context)
 
@@ -61,4 +64,55 @@ def article_add(request):
         data = form.cleaned_data
         form.save()
         return HttpResponse("Article added!")
+
+
+class ContactFormView(generic.TemplateView):
+    form_for_author = forms.AuthorForm
+    form_for_article = forms.ArticleForm
+    form_contact = forms.ContactForm
+
+    def post(self, request):
+        form = forms.ContactForm(request.POST)
+        context = {
+            'form_for_author': self.form_for_author,
+            'form_for_article': self.form_for_article,
+            'form_contact': form,
+        }
+        if form.is_valid():
+            data = form.cleaned_data
+            return HttpResponse(data.items())
+        else:
+            return render(request, 'form.html', context)
+
+    def get(self, request):
+        context = {
+            'form_for_author': self.form_for_author,
+            'form_for_article': self.form_for_article,
+            'form_contact': self.form_contact,
+        }
+        return render(request, 'form.html', context)
+
+
+class UrlView(generic.TemplateView):
+    form_submit_url = forms.UrlForm
+
+    def get(self, request):
+        context = {
+            'form_url': self.form_submit_url
+        }
+        return render(request, 'url_form.html', context)
+
+    def post(self, request):
+        form = forms.UrlForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            print(data)
+        else:
+            print('invalid')
+            context = {
+                'form_url': form
+            }
+            return render(request, 'url_form.html', context)
+        return HttpResponse(form.cleaned_data.items())
 
