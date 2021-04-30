@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search form</title>
+</head>
+<body>
+<!--    <form action="/search/" method="get">-->
+<!--        <input type="text" name="q">-->
+<!--        <input type="submit" name="Search">-->
+<!--    </form>-->
+
+    <form action="/file-input/" method="post">
+        {%csrf_token%}
+        Name:<input type="text" name="name">
+        Surname:<input type="text" name="surname">
+        Gender:
+        <br>
+        <input type="radio" name="gender" value="male">Male
+        <br>
+        <input type="radio" name="gender" value="female">Female
+        <button type="submit">In File</button>
+    </form>
+
+
+</body>
+</html>
